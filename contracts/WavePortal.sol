@@ -8,7 +8,7 @@ contract WavePortal {
     uint256 totalWaves;
     uint256 private seed;
 
-    event NewWave(address indexed from, uint256 timestamp, string message);
+    event NewWave(address indexed from, uint256 timestamp, string message, int balanceChanged);
 
     struct Wave {
         address waver;
@@ -16,7 +16,9 @@ contract WavePortal {
         uint256 timestamp;
     }
 
-    Wave[] waves;
+    balanceChanged = 10;
+
+    Wave[] waves; // arr of waves from struct
 
     /*
      * This is an address => uint mapping, meaning I can associate an address with a number!
@@ -26,9 +28,6 @@ contract WavePortal {
 
     constructor() payable {
         console.log("We have been constructed!");
-        /*
-         * Set the initial seed
-         */
         seed = (block.timestamp + block.difficulty) % 100;
     }
 
@@ -36,7 +35,7 @@ contract WavePortal {
         /*
          * We need to make sure the current timestamp is at least 15-minutes bigger than the last timestamp we stored
          */
-    require(lastWavedAt[msg.sender] + 30 seconds < block.timestamp, "Must wait 30 seconds before waving again.");
+        require(lastWavedAt[msg.sender] + 15 seconds < block.timestamp, "Must wait 15 seconds before waving again.");
 
         /*
          * Update the current timestamp we have for the user
@@ -66,6 +65,10 @@ contract WavePortal {
         }
 
         emit NewWave(msg.sender, block.timestamp, _message);
+    }
+
+    if (balanceChanged != 0) {
+        require(success, "you have still a small chance! lessgo!")
     }
 
     function getAllWaves() public view returns (Wave[] memory) {
