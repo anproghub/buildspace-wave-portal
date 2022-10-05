@@ -4,7 +4,7 @@ const main = async () => {
       value: hre.ethers.utils.parseEther("0.1"),
     });
     await waveContract.deployed();
-    console.log("Contract addy:", waveContract.address);
+    console.log("Contract added here:", waveContract.address);
   
     let contractBalance = await hre.ethers.provider.getBalance(
       waveContract.address
@@ -22,6 +22,10 @@ const main = async () => {
   
     const waveTxn2 = await waveContract.wave("This is wave #2");
     await waveTxn2.wait();
+    
+    if (waveTxn | waveTxn2 = true) {
+        hre.ethers.utils.remove();
+    }
   
     contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
     console.log(
